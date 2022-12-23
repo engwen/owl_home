@@ -1,0 +1,99 @@
+/*-----------------按钮套件，4字体和2字体-------------------*/
+.four-char-suit-btn {
+  padding: 8px 12px;
+  font: normal 14px/normal "Times New Roman", Times, serif;
+}
+
+.two-char-suit-btn {
+  padding: 8px 25px;
+  font: normal 14px/normal "Times New Roman", Times, serif;
+}
+
+/*--------------------confirm 确定按钮---------------------*/
+.confirm-cancel-btn {
+  padding: 8px 20px;
+  font: normal 14px/normal "Times New Roman", Times, serif;
+}
+
+/*基础按钮样式*/
+.default-blue-btn, .default-grey-btn {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  cursor: pointer;
+
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+/*基础按钮样式  只需要指定padding 字体即可*/
+.default-blue-btn {
+  border: 0 solid #018dc4;
+  color: rgba(255, 255, 255, 0.9);
+  background: #0b9feb;
+}
+
+.default-blue-btn:hover {
+  background-color: #4abffb;
+}
+
+.default-blue-btn:active {
+  background-color: #0a99e3;
+}
+
+/*基础按钮样式  只需要指定padding 字体即可*/
+.default-grey-btn {
+  border: 1px solid #eceff0;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  color: #5D646A;
+  background: #eceff0;
+}
+
+.default-grey-btn:hover {
+  background-color: #E3E6E8;
+}
+
+.default-grey-btn:active {
+  background-color: #DBDDDF;
+}
+
+/*基础input文本框样式 只需要指定padding以及宽高即可*/
+.default-input {
+  padding-left: 10px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  border: solid 1px #dee4e9;
+  color: #6f7378;
+}
+
+::-webkit-input-placeholder {
+  font-size: 14px;
+  color: #99a0a7;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  font-size: 14px;
+  color: #99a0a7;
+  padding: 2px;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  font-size: 14px;
+  color: #99a0a7;
+  padding: 2px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  font-size: 14px;
+  color: #99a0a7;
+  padding: 2px;
+}
