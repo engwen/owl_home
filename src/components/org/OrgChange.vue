@@ -2,7 +2,7 @@
   <div class="details-div">
     <el-card class="box-card edit-content">
       <div slot="header" class="clearfix">
-        <span> <label>组织{{ orgModel.id ? '编辑' : '创建' }}</label></span>
+        <span> <label>组织{{ orgModel.id ? '编辑' : '新增' }}</label></span>
       </div>
       <div class="text item">
         <el-form ref="rulesForm" :rules="rules" :model="orgModel" label-width="200px">
@@ -58,7 +58,7 @@
             <el-button style="margin-right: 40px"
                        @click="handleCancel">取消
             </el-button>
-            <el-button type="primary" @click="handleCreate()"> {{ orgModel.id ? "更新" : "创建" }}
+            <el-button type="primary" @click="handleCreate()"> {{ orgModel.id ? "更新" : "新增" }}
             </el-button>
           </el-form-item>
         </el-form>
@@ -71,6 +71,7 @@
 import {GLOBAL_CONTENT} from "../../utils/contentConst";
 import {listTreeExceptSelect, orgCreate, orgTreeList, orgUpdate} from "../api/org";
 import {isContain, RULE_VALIDATE} from "../../utils/rule";
+import {routerPush} from "../../utils/request";
 
 export default {
   name: "Create",
@@ -128,7 +129,7 @@ export default {
         upOrgCode: "",
         level: "",
       }
-      this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
+      routerPush(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
     },
     handleCreate() {
       this.$refs['rulesForm'].validate(valid => {
@@ -141,12 +142,12 @@ export default {
               orgCreate(this.orgModel).then(response => {
                 if (response.result) {
                   this.$message({
-                    message: '创建成功',
+                    message: '新增成功',
                     type: 'success'
                   })
                   localStorage.setItem("magicAuthSignerOrgList", "")
                   // this.reload();
-                  this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
+                  routerPush(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
                 }
               }).catch(error => {
                 reject(error)
@@ -160,7 +161,7 @@ export default {
                     message: '更新成功',
                     type: 'success'
                   })
-                  this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
+                  routerPush(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
                 }
               }).catch(error => {
                 reject(error)

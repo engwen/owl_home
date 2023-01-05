@@ -2,7 +2,7 @@
   <div class="table-list-div">
     <div class="search-bar-div">
       <el-button size="small" type="primary" v-if="hasBtn(BTN_ID.CREATE_MENU_PAGE_BTN)" @click="handleCreateMenu" style="float: right">
-        创建菜单
+        新增菜单
       </el-button>
     </div>
     <div class="table-main-div">
@@ -63,7 +63,7 @@
           prop="node.menuPageUrl">
         </el-table-column>
         <el-table-column
-          label="创建时间"
+          label="新增时间"
           sortable
           prop="createTime"
           width="160px">
@@ -112,6 +112,7 @@
 <script>
   import {GLOBAL_CONTENT} from '../../utils/contentConst'
   import {listTreeExceptSelect, menuBanOrLeave, menuDelete,} from "../api/menu";
+  import {routerPush} from "../../utils/request";
 
 
   export default {
@@ -140,13 +141,13 @@
         return true;
       },
       handleCreateMenu() {
-        this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.MENU_CREATE)
+        routerPush(GLOBAL_CONTENT.ROUTER_PATH.MENU_CREATE)
       },
       handleEditMenu(index, row) {
-        this.$router.push({path: GLOBAL_CONTENT.ROUTER_PATH.MENU_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "n"}});
+        routerPush({path: GLOBAL_CONTENT.ROUTER_PATH.MENU_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "n"}});
       },
       handleAddDownMenu(index, row) {
-        this.$router.push({path: GLOBAL_CONTENT.ROUTER_PATH.MENU_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "y"}});
+        routerPush({path: GLOBAL_CONTENT.ROUTER_PATH.MENU_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "y"}});
       },
       handleDelete(index, row) {
         console.log(index, row);

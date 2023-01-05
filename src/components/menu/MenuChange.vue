@@ -2,7 +2,7 @@
   <div class="details-div">
     <el-card class="box-card edit-content">
       <div slot="header" class="clearfix">
-        <span>  <label>菜单{{ menuModel.id ? '编辑' : '创建' }}</label></span>
+        <span>  <label>菜单{{ menuModel.id ? '编辑' : '新增' }}</label></span>
       </div>
       <el-form ref="rulesForm" :rules="rules" :model="menuModel" label-width="200px">
         <el-form-item label="菜单名称:" prop="menuName">
@@ -67,7 +67,7 @@
           <el-button style="margin-right: 40px"
                      @click="handleCancel">取消
           </el-button>
-          <el-button type="primary" @click="handleCreate()">{{ menuModel.id ? "更新" : "创建" }}
+          <el-button type="primary" @click="handleCreate()">{{ menuModel.id ? "更新" : "新增" }}
           </el-button>
         </el-form-item>
       </el-form>
@@ -79,6 +79,7 @@
 <script>
 import {GLOBAL_CONTENT} from "../../utils/contentConst";
 import {listTreeExceptSelect, menuCreate, menuUpdate} from "../api/menu";
+import {routerPush} from "../../utils/request";
 
 export default {
   name: "Create",
@@ -140,7 +141,7 @@ export default {
         upMenuCode: "",
         level: "",
       }
-      this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.MENU_LIST);
+      routerPush(GLOBAL_CONTENT.ROUTER_PATH.MENU_LIST);
     },
     handleCreate() {
       this.$refs['rulesForm'].validate(valid => {
@@ -150,10 +151,10 @@ export default {
               menuCreate(this.menuModel).then(response => {
                 if (response.result) {
                   this.$message({
-                    message: '创建成功',
+                    message: '新增成功',
                     type: 'success'
                   })
-                  this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.MENU_LIST);
+                  routerPush(GLOBAL_CONTENT.ROUTER_PATH.MENU_LIST);
                 }
               }).catch(error => {
                 reject(error)
@@ -167,7 +168,7 @@ export default {
                     message: '更新成功',
                     type: 'success'
                   })
-                  this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.MENU_LIST);
+                  routerPush(GLOBAL_CONTENT.ROUTER_PATH.MENU_LIST);
                 }
               }).catch(error => {
                 reject(error)

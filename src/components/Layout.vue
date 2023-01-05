@@ -61,6 +61,7 @@ import {orgListByUser, signerTopOrgList} from "./api/org";
 import {signout} from "./api/user";
 import {menuListTreeBySigner, menuTreeList} from "./api/menu";
 import {isContain} from "../utils/rule";
+import {routerPush} from "../utils/request";
 
 export default {
   name: "Layout",
@@ -117,9 +118,9 @@ export default {
         this.selectDefOrg = JSON.parse(defOrgStr)
       }
       if (hasLink) {
-        this.$router.push(hasLink);
+        routerPush(hasLink);
       } else {
-        this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
+        routerPush(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
       }
     },
     changeOrg(data) {
@@ -148,7 +149,7 @@ export default {
       localStorage.removeItem("magicAuthSignerOrgList")
       localStorage.removeItem("magicAuthDefOrg")
       //跳轉登錄頁
-      this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.SIGNIN_PATH);
+      routerPush(GLOBAL_CONTENT.ROUTER_PATH.SIGNIN_PATH);
     },
     getMenuTree() {
       new Promise((resolve, reject) => {
@@ -170,7 +171,7 @@ export default {
   },
   created() {
     if (!localStorage.magicAuthToken) {
-      this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.SIGNIN_PATH);
+      routerPush(GLOBAL_CONTENT.ROUTER_PATH.SIGNIN_PATH);
     }
     let signer = JSON.parse(localStorage.magicAtuhSigniner)
     if (signer.roleList.length === 1 && signer.roleList[0].roleCode === "defUser") {

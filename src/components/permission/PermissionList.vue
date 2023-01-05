@@ -8,7 +8,7 @@
       <el-button size="small" type="primary" @click="searchList()" style="float: left">查找
       </el-button>
       <el-button size="small" type="primary" v-if="hasBtn(BTN_ID.CREATE_USER_PAGE_BTN)" @click="handleCreate" style="float: right">
-        创建接口
+        新增接口
       </el-button>
     </div>
     <div class="table-main-div">
@@ -70,7 +70,7 @@
       :before-close="editPermissionHandleClose">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <label>接口{{editPermissionModel.id?'编辑':'创建'}}</label>
+          <label>接口{{editPermissionModel.id?'编辑':'新增'}}</label>
         </div>
         <el-form ref="rulesForm" :rules="rules" :model="editPermissionModel" label-width="200px">
           <el-form-item label="接口路径:" prop="permissionUrl">
@@ -82,7 +82,7 @@
                        @click="editPermissionHandleClose">取消
             </el-button>
             <el-button type="primary"  @click="handleEditPermission()">
-              {{editPermissionModel.id?"更新":"创建"}}
+              {{editPermissionModel.id?"更新":"新增"}}
             </el-button>
           </el-form-item>
         </el-form>
@@ -95,7 +95,7 @@
           width="50%"
           center>
           <div slot="header" class="clearfix">
-            <label>接口{{editPermissionModel.id?'编辑':'创建'}}</label>
+            <label>接口{{editPermissionModel.id?'编辑':'新增'}}</label>
           </div>
           <el-form ref="rulesForm" :rules="rules" :model="editPermissionModel" label-width="200px">
             <el-form-item label="接口路径:" prop="permissionUrl">
@@ -106,7 +106,7 @@
               <el-button  style="margin-right: 40px"
                           @click="editPermissionHandleClose">取消
               </el-button>
-              <el-button type="primary"  @click="handleEditPermission()"> {{editPermissionModel.id?"更新":"创建"}}
+              <el-button type="primary"  @click="handleEditPermission()"> {{editPermissionModel.id?"更新":"新增"}}
               </el-button>
             </el-form-item>
           </el-form>
@@ -220,7 +220,7 @@
             permissionCreate(params).then(response => {
               if (response.result) {
                 this.$message({
-                  message: '创建成功',
+                  message: '新增成功',
                   type: 'success'
                 })
                 this.searchList()

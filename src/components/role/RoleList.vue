@@ -11,7 +11,7 @@
       </el-button>
       <el-button size="small" type="primary" v-if="hasBtn(BTN_ID.CREATE_USER_PAGE_BTN)" @click="handleCreate"
                  style="float: right">
-        创建角色
+        新增角色
       </el-button>
     </div>
     <div class="table-main-div">
@@ -89,7 +89,7 @@
       :showClose="false">
       <div>
         <span>
-          <label>角色{{editRoleModel.id?'编辑':'创建'}}</label>
+          <label>角色{{editRoleModel.id?'编辑':'新增'}}</label>
         </span>
         <el-button style="float: right;" size="small" @click="dialogHandleClose">取消</el-button>
       </div>
@@ -109,7 +109,7 @@
         <el-button style="margin-right: 40px"
                    @click="dialogHandleClose">取消
         </el-button>
-        <el-button type="primary" @click="handleEditRole()"> {{editRoleModel.id?"更新":"创建"}}
+        <el-button type="primary" @click="handleEditRole()"> {{editRoleModel.id?"更新":"新增"}}
         </el-button>
       </span>
     </el-dialog>
@@ -452,7 +452,7 @@
             roleCreate(params).then(response => {
               if (response.result) {
                 this.$message({
-                  message: '创建成功',
+                  message: '新增成功',
                   type: 'success'
                 })
                 this.searchList()

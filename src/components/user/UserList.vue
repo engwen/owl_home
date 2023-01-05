@@ -15,7 +15,7 @@
       </el-button>
       <el-button size="small" type="primary" v-if="hasBtn(BTN_ID.CREATE_USER_PAGE_BTN)" @click="handleCreate"
                  style="float: right">
-        创建用户
+        新增用户
       </el-button>
 <!--      <el-button size="small" type="primary" v-if="hasBtn(BTN_ID.ADD_USER_PAGE_BTN)" @click="handleAddOrgUser"
                  style="float: right">
@@ -72,7 +72,7 @@
           </template>
         </el-table-column>-->
         <el-table-column
-          label="创建时间"
+          label="新增时间"
           sortable
           width="160px"
           prop="createTime">
@@ -91,7 +91,6 @@
         </el-table-column>
         <el-table-column
           label="操作"
-          width="360px"
           fixed="right">
           <template #default="scope">
             <el-button
@@ -105,6 +104,12 @@
               size="small"
               :disabled="!scope.row.status"
               @click="handleUserRole(scope.$index, scope.row)">角色
+            </el-button>
+            <el-button
+                v-if="hasBtn(BTN_ID.REST_USER_PASS_BTN)"
+                size="small"
+                :disabled="!scope.row.status"
+                @click="handleResetPass(scope.$index, scope.row)">重置密码
             </el-button>
             <el-button
               v-if="hasBtn(BTN_ID.BAN_OR_LEAVE_USER_BTN)"
@@ -166,10 +171,19 @@
 
 <script>
   import {GLOBAL_CONTENT} from '../../utils/contentConst'
-  import {userDelete, userList, userBanOrLeave, userRoleAdd, userRoleRemove, listByOrgUser} from "../api/user";
+  import {
+    userDelete,
+    userList,
+    userBanOrLeave,
+    userRoleAdd,
+    userRoleRemove,
+    listByOrgUser,
+    resetPassword
+  } from "../api/user";
   import {roleList, roleListByUserId} from "../api/role";
   import {isContain} from "../../utils/rule";
   import {removeOrgUser} from "../api/org";
+  import {routerPush} from "../../utils/request";
 
 
   export default {
@@ -204,10 +218,10 @@
         return true;
       },
       handleCreate() {
-        this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.USER_CREATE);
+        routerPush(GLOBAL_CONTENT.ROUTER_PATH.USER_CREATE);
       },
       handleEdit(index, row) {
-        this.$router.push({path: GLOBAL_CONTENT.ROUTER_PATH.USER_CREATE, query: row});
+        routerPush({path: GLOBAL_CONTENT.ROUTER_PATH.USER_CREATE, query: row});
       },
       handleBan(index, row) {
         let params = {
@@ -299,6 +313,32 @@
 
           }).catch(error => {
             reject(error)
+          })
+        })
+      },
+      handleResetPass(index, row) {
+        let params = {
+          orgCode: row.orgCode,
+          topOrgCode: row.topOrgCode,
+          userAccount: row.account,
+        }
+        this.$confirm('是否确认重置密码?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          new Promise((resolve, reject) => {
+            resetPassword(params).then(response => {
+              if (response.result) {
+                this.$message({
+                  message: '重置成功',
+                  type: 'success'
+                })
+              }
+              this.handleCurrentChange(this.requestPage);
+            }).catch(error => {
+              reject(error)
+            })
           })
         })
       },

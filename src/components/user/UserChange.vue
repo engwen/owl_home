@@ -2,7 +2,7 @@
   <div class="details-div">
     <el-card class="box-card edit-content">
       <div slot="header" class="clearfix">
-        <span> <label>用户{{accountModel.id?'编辑':'创建'}}</label></span>
+        <span> <label>用户{{accountModel.id?'编辑':'新增'}}</label></span>
       </div>
       <el-form ref="rulesForm" :rules="rules" :model="accountModel" label-width="200px">
         <el-form-item label="账号:" prop="account">
@@ -27,7 +27,7 @@
           <el-button  style="margin-right: 40px"
                      @click="handleCancel">取消
           </el-button>
-          <el-button type="primary"  @click="handleCreate()"> {{isCreate?"创建":"更新"}}</el-button>
+          <el-button type="primary"  @click="handleCreate()"> {{isCreate?"新增":"更新"}}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -38,6 +38,7 @@
   import {GLOBAL_CONTENT} from "../../utils/contentConst";
   import {userCreate, userUpdate} from "../api/user";
   import {RULE_VALIDATE} from "../../utils/rule";
+  import {routerPush} from "../../utils/request";
 
   export default {
     name: "Create",
@@ -101,7 +102,7 @@
           email: "",
           hasBan: "false"
         }
-        this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
+        routerPush(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
       },
       handleCreate() {
         this.$refs['rulesForm'].validate(valid => {
@@ -111,10 +112,10 @@
                 userCreate(this.accountModel).then(response => {
                   if (response.result) {
                     this.$message({
-                      message: '创建成功',
+                      message: '新增成功',
                       type: 'success'
                     })
-                    this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
+                    routerPush(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
                   }
                 }).catch(error => {
                   reject(error)
@@ -128,7 +129,7 @@
                       message: '更新成功',
                       type: 'success'
                     })
-                    this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
+                    routerPush(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
                   }
                 }).catch(error => {
                   reject(error)

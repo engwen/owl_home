@@ -18,7 +18,7 @@
 
 <script>
 
-import {endLoading, startLoading} from "../../utils/request";
+import {routerPush} from "../../utils/request";
 
   export default {
     name: "LeftMenuTree",
@@ -28,13 +28,11 @@ import {endLoading, startLoading} from "../../utils/request";
     },
     methods: {
       menuClick() {
-        startLoading()
-        this.$router.push(this.menuNode.node.menuPageUrl)
-        endLoading()
+        routerPush(this.menuNode.node.menuPageUrl)
       }
     },
     created() {
-      // this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
+      // routerPush(GLOBAL_CONTENT.ROUTER_PATH.USER_LIST);
     }
   }
 </script>

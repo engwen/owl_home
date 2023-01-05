@@ -114,3 +114,12 @@ export function userRoleRemove(data) {
     data
   })
 }
+
+
+export function resetPassword(data) {
+  return request({
+    url: '/owlUser/resetPassword',
+    method: 'post',
+    data
+  })
+}

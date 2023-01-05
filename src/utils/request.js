@@ -5,11 +5,17 @@ import {router as router} from "../router";
 
 let loading
 
+export function routerPush(pushData){
+    startLoading()
+    router.push(pushData)
+    endLoading()
+}
+
 export function startLoading() {
     loading = Loading.service({
         lock: true,
         text: '加载中....',
-        background: 'rgba(0, 0, 0, 0.7)'
+        background: 'rgba(0, 0, 0, 0.1)'
     })
 }
 

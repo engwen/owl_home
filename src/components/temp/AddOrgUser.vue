@@ -195,6 +195,7 @@
   } from "../api/org";
   import {isContain, RULE_VALIDATE} from "../../utils/rule";
   import {listByAddOrgUser, listByOrgUser} from "../api/user";
+  import {routerPush} from "../../utils/request";
 
   export default {
     name: "AddUser",
@@ -252,7 +253,7 @@
       },
       handleCancel() {
         this.orgNode = {}
-        this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
+        routerPush(GLOBAL_CONTENT.ROUTER_PATH.ORG_LIST);
       },
 
       /**
@@ -373,7 +374,6 @@
             }
             params.modelList.push(model)
           });
-          alert(JSON.stringify(params))
 
           new Promise((resolve, reject) => {
             updateUserList(params).then(response => {

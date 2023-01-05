@@ -1,32 +1,34 @@
 <template>
-  <div id="signin" class="main-body div-middle-flex">
-    <div class="sign-in-content div-middle-position" @keyup.enter="onSubmit()">
-      <div class="sign-in-left-bar">
-        <div class="sign-in-row" style="margin-top: 130px">
+  <div class="main-body">
+    <div id="signin" class="div-middle-flex">
+      <div class="sign-in-content div-middle-position" @keyup.enter="onSubmit()">
+        <div class="sign-in-left-bar">
+          <div class="sign-in-row" style="margin-top: 130px">
+          </div>
+          <div class="sign-in-row" style="margin-top: 35px">
+            <span style="color: #FFFFFF;font-size: 20px;">权限管理系统</span>
+          </div>
+          <div class="sign-in-row" style="margin-top: 35px">
+            <span style="color: #FFFFFF;font-size: 20px;">by Owl</span>
+          </div>
         </div>
-        <div class="sign-in-row" style="margin-top: 35px">
-          <span style="color: #FFFFFF;font-size: 20px;">权限管理系统</span>
+        <div class="sign-in-right-bar">
+          <div class="sign-in-row" style="margin-top:50px;margin-bottom: 20px">
+            <span class="warn_span_color">&nbsp;</span>
+          </div>
+          <el-form ref="rulesForm" :rules="rules" :model="form">
+            <el-form-item class="sign-in-row" style=" margin-bottom: 50px;margin-top: 40px" prop="username">
+              <el-input class="sign-in-input" placeholder="请输入账号" v-model="form.username"
+                        clearable/>
+            </el-form-item>
+            <el-form-item class="sign-in-row" style=" margin-bottom: 50px;" prop="password">
+              <el-input type="password" class="sign-in-input" v-model="form.password" placeholder="请输入密码" clearable/>
+            </el-form-item>
+            <el-form-item class="sign-in-row" style=" margin-top: 20px;">
+              <el-button type="primary" v-on:click="onSubmit()" class="sign-in-btn default-blue-btn">登录</el-button>
+            </el-form-item>
+          </el-form>
         </div>
-        <div class="sign-in-row" style="margin-top: 35px">
-          <span style="color: #FFFFFF;font-size: 20px;">by Owl</span>
-        </div>
-      </div>
-      <div class="sign-in-right-bar">
-        <div class="sign-in-row" style="margin-top:50px;margin-bottom: 20px">
-          <span class="warn_span_color">&nbsp;</span>
-        </div>
-        <el-form ref="rulesForm" :rules="rules" :model="form">
-          <el-form-item class="sign-in-row" style=" margin-bottom: 50px;margin-top: 40px" prop="username">
-            <el-input class="sign-in-input" placeholder="请输入账号" v-model="form.username"
-                      clearable/>
-          </el-form-item>
-          <el-form-item class="sign-in-row" style=" margin-bottom: 50px;" prop="password">
-            <el-input type="password" class="sign-in-input" v-model="form.password" placeholder="请输入密码" clearable/>
-          </el-form-item>
-          <el-form-item class="sign-in-row" style=" margin-top: 20px;">
-            <el-button type="primary" v-on:click="onSubmit()" class="sign-in-btn default-blue-btn">登录</el-button>
-          </el-form-item>
-        </el-form>
       </div>
     </div>
   </div>
@@ -35,6 +37,7 @@
 <script>
 import {GLOBAL_CONTENT} from '../utils/contentConst'
 import {signin} from './api/user'
+import {routerPush} from "../utils/request";
 
 
 export default {
@@ -81,7 +84,7 @@ export default {
               localStorage.setItem("magicAuthDefOrg", JSON.stringify(response.resultData.defOrg))
               // resolve()
               // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
-              this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.LAYOUT_PATH);
+              routerPush(GLOBAL_CONTENT.ROUTER_PATH.LAYOUT_PATH);
             }).catch(error => {
               reject(error)
             })
@@ -94,7 +97,7 @@ export default {
   },
   created() {
     if (localStorage.magicAuthToken) {
-      this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.LAYOUT_PATH);
+      routerPush(GLOBAL_CONTENT.ROUTER_PATH.LAYOUT_PATH);
     }
   }
 }
@@ -103,11 +106,13 @@ export default {
 
 <style scoped>
 .main-body {
-  background-color: #EEF2F5;
+  background-color: #FFFFFF;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  margin: 0 30%;
+  padding: 10% 0;
 }
 
 /*居中显示*/

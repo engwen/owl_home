@@ -1,5 +1,3 @@
-import service from "./request";
-
 /**
  * @author engwen
  * email xiachanzou@outlook.com
@@ -77,6 +75,15 @@ export const GLOBAL_CONTENT = {
     ORG_UPDATE: "/layout/org/update",
     ORG_DETAILS: "/layout/org/details",
 
+    DICT_LIST: "/layout/dict/list",
+    DICT_CREATE: "/layout/dict/create",
+    DICT_UPDATE: "/layout/dict/update",
+
+
+    DICTTREE_LIST: "/layout/dictTree/list",
+    DICTTREE_CREATE: "/layout/dictTree/create",
+    DICTTREE_UPDATE: "/layout/dictTree/update",
+
     ORG_USER_LIST: "/layout/org/userList",
     SIGNIN_INFO: "/layout/my/info",
     APPLY_LIST: "/layout/apply/list",
@@ -92,6 +99,7 @@ export const GLOBAL_CONTENT = {
     EDIT_USER_PAGE_BTN: "editUserPageBtn",
     BAN_OR_LEAVE_USER_BTN: "banOrLeaveUserBtn",
     DELETE_USER_BTN: "deleteUserBtn",
+    REST_USER_PASS_BTN: "restUserPassBtn",
 
     CREATE_ROLE_PAGE_BTN: "createRolePageBtn",
     EDIT_ROLE_PAGE_BTN: "editRlePageBtn",

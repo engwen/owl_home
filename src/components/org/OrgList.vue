@@ -2,7 +2,7 @@
   <div class="table-list-div">
     <div class="search-bar-div">
       <el-button size="small" type="primary" v-if="hasBtn(BTN_ID.CREATE_ORG_PAGE_BTN)" @click="handleCreateOrg" style="float: right">
-        创建组织
+        新增组织
       </el-button>
 <!--      <el-button
         v-if="hasBtn(BTN_ID.DELETE_ORG_BTN)"
@@ -75,7 +75,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="创建时间"
+          label="新增时间"
           sortable
           prop="createTime"
           width="160px">
@@ -135,6 +135,7 @@
   import {GLOBAL_CONTENT} from '../../utils/contentConst'
   import {orgBanOrLeave, orgDelete, orgList, orgTreeList} from "../api/org";
   import {isContain} from "../../utils/rule";
+  import {routerPush} from "../../utils/request";
 
 
   export default {
@@ -164,13 +165,13 @@
         return true;
       },
       handleCreateOrg() {
-        this.$router.push(GLOBAL_CONTENT.ROUTER_PATH.ORG_CREATE)
+        routerPush(GLOBAL_CONTENT.ROUTER_PATH.ORG_CREATE)
       },
       handleEditOrg(index, row) {
-        this.$router.push({path: GLOBAL_CONTENT.ROUTER_PATH.ORG_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "n"}});
+        routerPush({path: GLOBAL_CONTENT.ROUTER_PATH.ORG_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "n"}});
       },
       handleAddDownOrg(index, row) {
-        this.$router.push({path: GLOBAL_CONTENT.ROUTER_PATH.ORG_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "y"}});
+        routerPush({path: GLOBAL_CONTENT.ROUTER_PATH.ORG_CREATE, query: {node: JSON.stringify(row.node), isUpNode: "y"}});
       },
       handleBan(index, row) {
         let params = {

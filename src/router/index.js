@@ -14,7 +14,11 @@ import OrgUserList from "../components/org/OrgUserList.vue";
 import AddOrgUser from "../components/temp/AddOrgUser.vue";
 import Info from "../components/my/Info.vue";
 import ApplyList from "../components/apply/ApplyList.vue";
+import DictList from "../components/dict/DictList.vue";
+
+
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
+
 
 
 const routes = [
@@ -91,6 +95,10 @@ const routes = [
             {
                 path: GLOBAL_CONTENT.ROUTER_PATH.MENU_CREATE,
                 component: MenuChange,
+            },
+            {
+                path: GLOBAL_CONTENT.ROUTER_PATH.DICT_LIST,
+                component: DictList,
             },
             /*        {
                       path: GLOBAL_CONTENT.ROUTER_PATH.PAGE_LIST + "/:id",
